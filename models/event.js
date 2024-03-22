@@ -3,21 +3,36 @@ const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class Event extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Define has-many association with MeetGreet model
+      this.hasMany(models.MeetGreet, {
+        foreignKey: 'eventId', // Foreign key in the MeetGreet model that points to Event
+        as: 'meetGreets', // Alias for the associated MeetGreet model
+      });
+
+      // Define has-many association with SetTime model
+      this.hasMany(models.SetTime, {
+        foreignKey: 'eventId', // Foreign key in the SetTime model that points to Event
+        as: 'setTimes', // Alias for the associated SetTime model
+      });
     }
   }
 
   Event.init(
     {
-      name: DataTypes.STRING,
-      date: DataTypes.DATE,
-      location: DataTypes.STRING,
+      // Define the columns of the Event model
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false, // Name is required
+      },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false, // Date is required
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false, // Location is required
+      },
     },
     {
       sequelize,
@@ -28,3 +43,5 @@ module.exports = (sequelize) => {
 
   return Event;
 };
+
+

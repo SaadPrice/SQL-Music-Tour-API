@@ -1,20 +1,22 @@
+// meetGreet.js
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class MeetGreet extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Define belongs-to association with Band model
+      this.belongsTo(models.Band, { foreignKey: 'bandId', as: 'band' });
+
+      // Define belongs-to association with Event model
+      this.belongsTo(models.Event, { foreignKey: 'eventId', as: 'event' });
     }
   }
 
   MeetGreet.init(
     {
+      // Define the columns of the MeetGreet model
+      bandId: DataTypes.INTEGER,
       eventId: DataTypes.INTEGER,
       location: DataTypes.STRING,
       startTime: DataTypes.TIME,
@@ -29,3 +31,4 @@ module.exports = (sequelize) => {
 
   return MeetGreet;
 };
+

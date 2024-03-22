@@ -2,11 +2,16 @@
 const express = require('express');
 const app = express();
 const { Sequelize } = require('sequelize');
+const { sequelize } = require('./models'); // Import Sequelize instance from models
 
 // CONFIGURATION / MIDDLEWARE
 require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Import Event and Stage controllers
+const eventController = require('./controllers/eventController');
+const stageController = require('./controllers/stageController');
 
 // ROOT
 app.get('/', (req, res) => {
@@ -15,12 +20,12 @@ app.get('/', (req, res) => {
     });
 });
 
-// Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize(process.env.DB_CONNECTION);
-
+// Use Event and Stage controllers
+app.use('/events', eventController);
+app.use('/stages', stageController);
 
 // LISTEN
-app.listen(process.env.PORT, async  () => {
+app.listen(process.env.PORT, async () => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
