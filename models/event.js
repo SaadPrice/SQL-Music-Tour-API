@@ -37,11 +37,9 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'Event',
-      timestamps: false, // Add this line to disable timestamps
+      timestamps: false, // Disable timestamps
     }
   );
 
   return Event;
 };
-
-

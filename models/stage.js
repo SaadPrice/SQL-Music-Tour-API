@@ -27,10 +27,9 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'Stage',
-      timestamps: false, // Add this line to disable timestamps
+      timestamps: false, // Disable timestamps
     }
   );
 
   return Stage;
 };
-

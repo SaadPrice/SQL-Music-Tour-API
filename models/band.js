@@ -1,4 +1,3 @@
-// band.js
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
@@ -22,7 +21,7 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'Band',
-      timestamps: false, // Add this line to disable timestamps
+      timestamps: false, // Disable timestamps
     }
   );
 

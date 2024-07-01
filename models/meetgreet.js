@@ -1,4 +1,3 @@
-// meetGreet.js
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
@@ -25,10 +24,9 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'MeetGreet',
-      timestamps: false, // Add this line to disable timestamps
+      timestamps: false, // Disable timestamps
     }
   );
 
   return MeetGreet;
 };
-
